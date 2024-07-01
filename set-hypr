@@ -330,6 +330,11 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     # Copy the SDDM theme
     echo -e "$CNT - Setting up the login screen."
     sudo cp -R Extras/sdt /usr/share/sddm/themes/
+        
+    # Copy wallpaper and link within sddm
+    cp -f ~/.config/HyprV/backgrounds/v2-background-dark.jpg ~/wallpaper.jpg
+    sudo ln -sf ~/wallpaper.jpg /usr/share/sddm/themes/wallpaper.jpg
+    
     sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
     sudo mkdir /etc/sddm.conf.d
     echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf &>> $INSTLOG
@@ -348,9 +353,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
     xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-    gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-    
-    cp -f ~/.config/HyprV/backgrounds/v2-background-dark.jpg ~/wallpaper.jpg
+    gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"    
 fi
 
 ### Install the starship shell ###
