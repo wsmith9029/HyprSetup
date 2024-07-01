@@ -266,7 +266,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     cp -R HyprV ~/.config/
 
     #set the measuring unit
-    echo -e "$CNT - Attempring to set mesuring unit..."
+    echo -e "$CNT - Attempting to set mesuring unit..."
     if locale -a | grep -q ^en_US; then
         echo -e "$COK - Setting mesuring system to imperial..."
         cp ~/.config/HyprV/waybar/conf/mesu-imp.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
@@ -309,6 +309,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     
     # Waybar
     cp ~/.config/HyprV/waybar/conf/v2-config.jsonc ~/.config/waybar/config.jsonc
+    cp ~/.config/HyprV/waybar/conf/mesu.jsonc ~/.config/waybar/mesu.jsonc
     cp ~/.config/HyprV/waybar/style/v2-style-dark.css ~/.config/waybar/style.css
     ## Copy all scripts.
     cp -r ~/.config/HyprV/waybar/scripts ~/.config/waybar/
