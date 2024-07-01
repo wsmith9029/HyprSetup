@@ -1,5 +1,7 @@
-# HyprV4
-This is V4 of the Hyprland install script
+# HyprSetup
+This is a fork of the HyprV4 script, made by SolDoesTech.
+
+I have refactored how the configuration is imported into the user config directory, mainly to reduce/remove symlinks which is a pain to untangle.
 
 It contains a collection of dot config files for hyprland with a simple install script.
 IMPORTANT - This script is meant to run on a clean fresh Arch install on physical hardware

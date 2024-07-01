@@ -269,12 +269,12 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     echo -e "$CNT - Attempring to set mesuring unit..."
     if locale -a | grep -q ^en_US; then
         echo -e "$COK - Setting mesuring system to imperial..."
-        ln -sf ~/.config/HyprV/waybar/conf/mesu-imp.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
+        cp ~/.config/HyprV/waybar/conf/mesu-imp.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
         sed -i 's/SET_MESU=""/SET_MESU="I"/' ~/.config/HyprV/hyprv.conf
     else
         echo -e "$COK - Setting mesuring system to metric..."
         sed -i 's/SET_MESU=""/SET_MESU="M"/' ~/.config/HyprV/hyprv.conf
-        ln -sf ~/.config/HyprV/waybar/conf/mesu-met.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
+        cp ~/.config/HyprV/waybar/conf/mesu-met.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
     fi
 
     # Setup each appliaction
@@ -292,17 +292,33 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
         mkdir -p $DIRPATH &>> $INSTLOG
     done
 
-    # link up the config files
+    # I like the V2 styling, so copy those configs where appropriate
     echo -e "$CNT - Setting up the new config..." 
     cp ~/.config/HyprV/hypr/* ~/.config/hypr/
-    ln -sf ~/.config/HyprV/kitty/kitty.conf ~/.config/kitty/kitty.conf
-    ln -sf ~/.config/HyprV/mako/conf/config-dark ~/.config/mako/config
-    ln -sf ~/.config/HyprV/swaylock/config ~/.config/swaylock/config
-    ln -sf ~/.config/HyprV/waybar/conf/v4-config.jsonc ~/.config/waybar/config.jsonc
-    ln -sf ~/.config/HyprV/waybar/style/v4-style-dark.css ~/.config/waybar/style.css
-    ln -sf ~/.config/HyprV/wlogout/layout ~/.config/wlogout/layout
-    ln -sf ~/.config/HyprV/wofi/config ~/.config/wofi/config
-    ln -sf ~/.config/HyprV/wofi/style/v4-style-dark.css ~/.config/wofi/style.css
+
+    # Kitty
+    cp ~/.config/HyprV/kitty/kitty.conf ~/.config/kitty/kitty.conf
+    cp ~/.config/HyprV/kitty/mocha.conf ~/.config/kitty/mocha.conf
+
+    # Mako
+    cp ~/.config/HyprV/mako/conf/config-dark ~/.config/mako/config
+    cp -r ~/.config/HyprV/mako/icons ~/.config/mako/
+
+    # Swaylock
+    cp ~/.config/HyprV/swaylock/config ~/.config/swaylock/config
+    
+    # Waybar
+    cp ~/.config/HyprV/waybar/conf/v2-config.jsonc ~/.config/waybar/config.jsonc
+    cp ~/.config/HyprV/waybar/style/v2-style-dark.css ~/.config/waybar/style.css
+    ## Copy all scripts.
+    cp -r ~/.config/HyprV/waybar/scripts ~/.config/waybar/
+
+    # Wlogout
+    cp ~/.config/HyprV/wlogout/layout ~/.config/wlogout/layout
+
+    # Wofi
+    cp ~/.config/HyprV/wofi/config ~/.config/wofi/config
+    cp ~/.config/HyprV/wofi/style/v2-style-dark.css ~/.config/wofi/style.css
 
 
     # add the Nvidia env file to the config (if needed)
@@ -332,7 +348,8 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
     gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-    cp -f ~/.config/HyprV/backgrounds/v4-background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+    
+    cp -f ~/.config/HyprV/backgrounds/v2-background-dark.jpg ~/wallpaper.jpg
 fi
 
 ### Install the starship shell ###
